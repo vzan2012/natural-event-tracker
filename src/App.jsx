@@ -4,6 +4,7 @@ import Header from "./components/Layouts/Header/Header";
 import Maps from "./components/Maps/Maps";
 
 function App() {
+  const controller = new AbortController();
   return (
     <>
       <Header title="Natural Event Tracker" />
