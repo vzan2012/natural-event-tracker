@@ -1,11 +1,11 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import classes from "./Maps.module.css";
 
-import { fetchEventsData } from "../../utils/http";
+import { Icon } from "@iconify/react";
 import { useQuery } from "@tanstack/react-query";
 import * as _ from "lodash";
 import { Map, Overlay, ZoomControl } from "pigeon-maps";
-import { Icon } from "@iconify/react";
+import { fetchEventsData } from "../../utils/http";
 import MapToolTip from "../UI/MapToolTip";
 
 const currentDate = new Date();
@@ -100,8 +100,6 @@ const Maps = ({ sourceObject }) => {
     },
   };
 
-  console.log("DATA - S");
-
   if (!isLoading) {
     latestEvents = formatEventsData(eventsData);
     console.log(latestEvents);
@@ -131,8 +129,6 @@ const Maps = ({ sourceObject }) => {
       );
     });
   }
-  console.log(markers);
-  console.log("DATA - E");
 
   return (
     <SimpleGrid className={classes["map-section"]}>
