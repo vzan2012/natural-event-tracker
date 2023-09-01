@@ -1,13 +1,12 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import classes from "./Maps.module.css";
 
-import LocationMarker from "../Location/LocationMarker/LocationMarker";
-
 import { fetchEventsData } from "../../utils/http";
 import { useQuery } from "@tanstack/react-query";
 import * as _ from "lodash";
-import { Map, Marker, Overlay, ZoomControl } from "pigeon-maps";
+import { Map, Overlay, ZoomControl } from "pigeon-maps";
 import { Icon } from "@iconify/react";
+import MapToolTip from "../UI/MapToolTip";
 
 const currentDate = new Date();
 
@@ -110,24 +109,24 @@ const Maps = ({ sourceObject }) => {
 
   if (latestEvents) {
     markers = latestEvents.map((event, index) => {
-      console.log(event.geometry.coordinates[1]);
-      console.log(event.geometry.coordinates[0]);
-      console.log(event.categories[0].id);
+      const coordinates = [
+        event.geometry.coordinates[1],
+        event.geometry.coordinates[0],
+      ];
+      const categoryName = event.categories[0].id;
+      const iconName = iconNameSet[categoryName].name;
+      const colorName = iconNameSet[categoryName].color;
+
       return (
-        <Overlay
-          key={index}
-          anchor={[
-            event.geometry.coordinates[1],
-            event.geometry.coordinates[0],
-          ]}
-          offset={[0, 0]}
-        >
-          <Icon
-            icon={iconNameSet[event.categories[0].id].name}
-            color={iconNameSet[event.categories[0].id].color}
-            className="map-location-icon"
-            fontSize={"30px"}
-          />
+        <Overlay key={index} anchor={[...coordinates]} offset={[0, 0]}>
+          <MapToolTip label={event.title} aria-label="Map ToolTip">
+            <Icon
+              icon={iconName}
+              color={colorName}
+              className={classes["map-location-icon"]}
+              fontSize={"30px"}
+            />
+          </MapToolTip>
         </Overlay>
       );
     });
