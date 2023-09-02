@@ -1,12 +1,11 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import classes from "./Maps.module.css";
 
-import { Icon } from "@iconify/react";
 import { useQuery } from "@tanstack/react-query";
 import * as _ from "lodash";
 import { Map, Overlay, ZoomControl } from "pigeon-maps";
 import { fetchEventsData } from "../../utils/http";
-import MapToolTip from "../UI/MapToolTip/MapToolTip";
+import MapModal from "./MapModal/MapModal";
 
 const currentDate = new Date();
 
@@ -16,9 +15,14 @@ const formatEventsData = (eventsData) => {
       ...event,
       geometry: event.geometry.filter(
         (todayEvent) =>
-          todayEvent.date.split("T")[0] ===
-          currentDate.toISOString().split("T")[0]
+          currentDate.toISOString().split("T")[0] >=
+          todayEvent.date.split("T")[0]
       ),
+      // geometry: event.geometry.filter(
+      //   (todayEvent) =>
+      //     todayEvent.date.split("T")[0] ===
+      //     currentDate.toISOString().split("T")[0]
+      // ),
     }))
     .filter((event) => event.geometry.length !== 0)
     .map((event) => ({
@@ -30,6 +34,7 @@ const formatEventsData = (eventsData) => {
 
 const Maps = ({ sourceObject }) => {
   let latestEvents, markers;
+
   const { fetchURL, controller } = sourceObject;
   const {
     data: eventsData,
@@ -45,64 +50,8 @@ const Maps = ({ sourceObject }) => {
       }),
   });
 
-  const iconNameSet = {
-    drought: {
-      name: "carbon:drought",
-      color: "#333",
-    },
-    dustHaze: {
-      name: "ri:haze-2-line",
-      color: "#5D4037",
-    },
-    earthquakes: {
-      name: "ri:earthquake-line",
-      color: "#FF5252",
-    },
-    floods: {
-      name: "ic:outline-flood",
-      color: "#3f51b5",
-    },
-    landslides: {
-      name: "mdi:landslide",
-      color: "#212121",
-    },
-    manmade: {
-      name: "game-icons:human-target",
-      color: "#ff5722",
-    },
-    seaLakeIce: {
-      name: "game-icons:frozen-orb",
-      color: "#448aff",
-    },
-    severeStorms: {
-      name: "wi:wu-chancetstorms",
-      color: "#FF5722",
-    },
-    snow: {
-      name: "wpf:snow",
-      color: "#448aff",
-    },
-    tempExtremes: {
-      name: "iconoir:temperature-high",
-      color: "#E91E63",
-    },
-    volcanoes: {
-      name: "fa6-solid:volcano",
-      color: "#d32f2f",
-    },
-    waterColor: {
-      name: "material-symbols:water-ph-outline",
-      color: "#009688",
-    },
-    wildfires: {
-      name: "mdi:fire-alert",
-      color: "#FF5722",
-    },
-  };
-
   if (!isLoading) {
     latestEvents = formatEventsData(eventsData);
-    console.log(latestEvents);
   }
 
   if (latestEvents) {
@@ -111,20 +60,10 @@ const Maps = ({ sourceObject }) => {
         event.geometry.coordinates[1],
         event.geometry.coordinates[0],
       ];
-      const categoryName = event.categories[0].id;
-      const iconName = iconNameSet[categoryName].name;
-      const colorName = iconNameSet[categoryName].color;
 
       return (
         <Overlay key={index} anchor={[...coordinates]} offset={[0, 0]}>
-          <MapToolTip label={event.title} aria-label="Map ToolTip">
-            <Icon
-              icon={iconName}
-              color={colorName}
-              className={classes["map-location-icon"]}
-              fontSize={"30px"}
-            />
-          </MapToolTip>
+          <MapModal eventData={event} />
         </Overlay>
       );
     });

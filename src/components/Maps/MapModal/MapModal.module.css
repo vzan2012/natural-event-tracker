@@ -1,0 +1,12 @@
+.map-location-icon {
+  cursor: pointer;
+}
+
+.customlist {
+  list-style-type: none !important;
+  margin-inline-start: 0 !important;
+}
+
+.customlist li {
+  margin-bottom: 10px;
+}
