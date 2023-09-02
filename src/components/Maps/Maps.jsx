@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import * as _ from "lodash";
 import { Map, Overlay, ZoomControl } from "pigeon-maps";
 import { fetchEventsData } from "../../utils/http";
-import MapToolTip from "../UI/MapToolTip";
+import MapToolTip from "../UI/MapToolTip/MapToolTip";
 
 const currentDate = new Date();
 
