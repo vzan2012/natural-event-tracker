@@ -1,8 +1,20 @@
-# React + Vite
+# Natural Event Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This ReactJS application displays the events that took in this planet. The datas are fetched from the NASA EONET (Earth Observatory Natural Event Tracker) API.
 
-Currently, two official plugins are available:
+Libraries used in this application are,
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Vite
+- Chakra UI
+
+### Site Link
+
+[Click Here](https://natural-event-tracker-xi.vercel.app/)
+
+### Author
+
+Sitharaman Deepak Guptha
+
+### Version
+
+1.0.0
