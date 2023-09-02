@@ -108,7 +108,7 @@ const MapModal = ({ eventData }) => {
                 <strong>Category Title</strong> : {categories[0].title}
               </ListItem>
               <ListItem>
-                <strong>Date</strong> : {eventDate}
+                <strong>Date</strong> : {eventDate.toString().split("T")[0]}
               </ListItem>
             </UnorderedList>
           </ModalBody>
