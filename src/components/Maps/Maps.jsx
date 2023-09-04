@@ -1,4 +1,4 @@
-import { Box, SimpleGrid } from "@chakra-ui/react";
+import { Box, CircularProgress, SimpleGrid, Text } from "@chakra-ui/react";
 import classes from "./Maps.module.css";
 
 import { useQuery } from "@tanstack/react-query";
@@ -18,11 +18,6 @@ const formatEventsData = (eventsData) => {
           currentDate.toISOString().split("T")[0] >=
           todayEvent.date.split("T")[0]
       ),
-      // geometry: event.geometry.filter(
-      //   (todayEvent) =>
-      //     todayEvent.date.split("T")[0] ===
-      //     currentDate.toISOString().split("T")[0]
-      // ),
     }))
     .filter((event) => event.geometry.length !== 0)
     .map((event) => ({
@@ -34,7 +29,6 @@ const formatEventsData = (eventsData) => {
 
 const Maps = ({ sourceObject }) => {
   let latestEvents, markers;
-
   const { fetchURL, controller } = sourceObject;
   const {
     data: eventsData,
@@ -71,11 +65,26 @@ const Maps = ({ sourceObject }) => {
 
   return (
     <SimpleGrid className={classes["map-section"]}>
+      {/* Show Error Block  */}
+      {isError && (
+        <Box className={classes.messagesBox}>
+          <Text color="red" textAlign="center">
+            {error.message}
+          </Text>
+        </Box>
+      )}
+      {/* Maps Block */}
       <Box className={classes.maps}>
-        <Map defaultCenter={[50.879, 4.6997]} defaultZoom={3}>
-          <ZoomControl />
-          {markers}
-        </Map>
+        {isLoading ? (
+          <Box className={classes.mapsloader}>
+            <CircularProgress isIndeterminate />
+          </Box>
+        ) : (
+          <Map defaultCenter={[50.879, 4.6997]} defaultZoom={3}>
+            <ZoomControl />
+            {markers}
+          </Map>
+        )}
       </Box>
     </SimpleGrid>
   );
