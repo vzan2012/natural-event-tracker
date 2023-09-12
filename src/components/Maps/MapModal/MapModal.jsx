@@ -82,6 +82,12 @@ const MapModal = ({ eventData }) => {
     categories,
   } = eventData;
 
+  const formattedEventDate = new Date(eventDate).toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+
   return (
     <>
       <Button variant="link" onClick={onOpen}>
@@ -108,7 +114,7 @@ const MapModal = ({ eventData }) => {
                 <strong>Category Title</strong> : {categories[0].title}
               </ListItem>
               <ListItem>
-                <strong>Date</strong> : {eventDate.toString().split("T")[0]}
+                <strong>Date</strong> : {formattedEventDate}
               </ListItem>
             </UnorderedList>
           </ModalBody>
