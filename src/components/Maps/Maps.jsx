@@ -1,11 +1,19 @@
-import { Box, CircularProgress, SimpleGrid, Text } from "@chakra-ui/react";
+import {
+  Box,
+  CircularProgress,
+  SimpleGrid,
+  SkeletonCircle,
+  Text,
+} from "@chakra-ui/react";
 import classes from "./Maps.module.css";
 
 import { useQuery } from "@tanstack/react-query";
 import * as _ from "lodash";
 import { Map, Overlay, ZoomControl } from "pigeon-maps";
+import { lazy, Suspense } from "react";
 import { fetchEventsData } from "../../utils/http";
-import MapModal from "./MapModal/MapModal";
+
+const MapModal = lazy(() => import("./MapModal/MapModal"));
 
 const currentDate = new Date();
 
@@ -57,7 +65,9 @@ const Maps = ({ sourceObject }) => {
 
       return (
         <Overlay key={index} anchor={[...coordinates]} offset={[0, 0]}>
-          <MapModal eventData={event} />
+          <Suspense fallback={<SkeletonCircle size="30px" />}>
+            <MapModal eventData={event} />
+          </Suspense>
         </Overlay>
       );
     });
