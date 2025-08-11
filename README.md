@@ -57,3 +57,14 @@ To execute the project in your local machine
    ```
    http://localhost:5173
    ```
+
+## 🌐 Live Deployment
+
+The application is continuously deployed via Vercel:  
+🔗 **[https://natural-event-tracker-xi.vercel.app/](https://natural-event-tracker-xi.vercel.app/)**
+
+---
+
+👨💻 **Maintained by**: [Deepak Guptha Sitharaman](https://github.com/vzan2012)  
+📜 **License**: [MIT](LICENSE.md)  
+🔄 **Version**: 1.0.0
