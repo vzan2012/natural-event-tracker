@@ -6,7 +6,7 @@ const Footer = ({ url, username }) => (
     <Box>
       <span>
         Created by user -{" "}
-        <Link href={url} isExternal>
+        <Link href={url} className={classes["footer-link"]} isExternal>
           {username}
         </Link>
       </span>

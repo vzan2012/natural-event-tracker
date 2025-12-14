@@ -1,6 +1,6 @@
 import {
   Box,
-  CircularProgress,
+  ProgressCircle,
   SimpleGrid,
   SkeletonCircle,
   Text,
@@ -87,7 +87,13 @@ const Maps = ({ sourceObject }) => {
       <Box className={classes.maps}>
         {isLoading ? (
           <Box className={classes.mapsloader}>
-            <CircularProgress isIndeterminate />
+            {/* <CircularProgress isIndeterminate /> */}
+            <ProgressCircle.Root value={null} size="sm">
+              <ProgressCircle.Circle>
+                <ProgressCircle.Track />
+                <ProgressCircle.Range />
+              </ProgressCircle.Circle>
+            </ProgressCircle.Root>
           </Box>
         ) : (
           <Map defaultCenter={[50.879, 4.6997]} defaultZoom={3}>

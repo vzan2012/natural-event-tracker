@@ -1,22 +1,9 @@
-import {
-  Button,
-  ListItem,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  UnorderedList,
-  useDisclosure,
-} from "@chakra-ui/react";
-
+import { Button, Portal, Dialog, CloseButton, List } from "@chakra-ui/react";
+import { Tooltip } from "@/components/ui/tooltip";
 import { Icon } from "@iconify/react";
 import classes from "./MapModal.module.css";
 
 const MapModal = ({ eventData }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   const iconNameSet = {
     drought: {
       name: "carbon:drought",
@@ -89,43 +76,54 @@ const MapModal = ({ eventData }) => {
   });
 
   return (
-    <>
-      <Button variant="link" onClick={onOpen}>
-        <Icon
-          icon={iconName}
-          color={colorName}
-          className={classes["map-location-icon"]}
-          fontSize={"30px"}
-        />
-      </Button>
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader textAlign="center">
-            <strong>{title}</strong>
-          </ModalHeader>
-          <ModalBody>
-            <UnorderedList className={classes.customlist}>
-              <ListItem>
-                <strong>Coordinates</strong> : [{coordinates[0]},{" "}
-                {coordinates[1]}]
-              </ListItem>
-              <ListItem>
-                <strong>Category Title</strong> : {categories[0].title}
-              </ListItem>
-              <ListItem>
-                <strong>Date</strong> : {formattedEventDate}
-              </ListItem>
-            </UnorderedList>
-          </ModalBody>
-          <ModalFooter>
-            <Button colorScheme="teal" size="sm" onClick={onClose}>
-              Close
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </>
+    <Dialog.Root>
+      <Dialog.Trigger asChild>
+        <Tooltip content={title}>
+          <Button variant="link">
+            <Icon
+              icon={iconName}
+              color={colorName}
+              className={classes["map-location-icon"]}
+              fontSize={"30px"}
+            />
+          </Button>
+        </Tooltip>
+      </Dialog.Trigger>
+      <Portal>
+        <Dialog.Backdrop />
+        <Dialog.Positioner>
+          <Dialog.Content>
+            <Dialog.Header>
+              <Dialog.Title>{title}</Dialog.Title>
+            </Dialog.Header>
+            <Dialog.Body>
+              <List.Root className={classes.customlist}>
+                <List.Item>
+                  <strong>Coordinates</strong> : [{coordinates[0].toFixed(2)},{" "}
+                  {coordinates[1].toFixed(2)}]
+                </List.Item>
+                <List.Item>
+                  <strong>Category Title</strong> : {categories[0].title}
+                </List.Item>
+                <List.Item>
+                  <strong>Date</strong> : {formattedEventDate}
+                </List.Item>
+              </List.Root>
+            </Dialog.Body>
+            <Dialog.Footer>
+              <Dialog.ActionTrigger asChild>
+                <Button colorScheme="teal" size="sm">
+                  Close
+                </Button>
+              </Dialog.ActionTrigger>
+              <Dialog.CloseTrigger asChild>
+                <CloseButton size="sm" />
+              </Dialog.CloseTrigger>
+            </Dialog.Footer>
+          </Dialog.Content>
+        </Dialog.Positioner>
+      </Portal>
+    </Dialog.Root>
   );
 };
 
