@@ -1,5 +1,5 @@
-import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
 import tsConfigPaths from "vite-tsconfig-paths";
 // import * as path from "path";
 
@@ -11,10 +11,4 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: "./src/setupTests.js",
   },
-  // resolve: {
-  //   alias: {
-  //     // "@/*": "./src/*",
-  //     "@/": path.resolve(__dirname, "./src/"),
-  //   },
-  // },
 });
