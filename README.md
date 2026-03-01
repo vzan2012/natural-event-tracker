@@ -72,4 +72,4 @@ The application is continuously deployed via Vercel:
 
 👨💻 **Maintained by**: [Deepak Guptha Sitharaman](https://github.com/vzan2012)  
 📜 **License**: [MIT](LICENSE.md)  
-🔄 **Version**: 1.0.0
+🔄 **Version**: 2.0.0
