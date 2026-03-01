@@ -15,3 +15,17 @@
 .messagesBox {
   margin: 15px 0;
 }
+
+.cluster-style {
+  width: 30px;
+  height: 30px;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  font-weight: bold;
+  z-index: 1000;
+}

@@ -1,68 +1,15 @@
-import { Button, Portal, Dialog, CloseButton, List } from "@chakra-ui/react";
 import { Tooltip } from "@/components/ui/tooltip";
+import { Button, CloseButton, Dialog, List, Portal } from "@chakra-ui/react";
 import { Icon } from "@iconify/react";
 import classes from "./MapModal.module.css";
 
+import { EVENT_CATEGORY } from "@/utils/eventCategories";
+
 const MapModal = ({ eventData }) => {
-  const iconNameSet = {
-    drought: {
-      name: "carbon:drought",
-      color: "#333",
-    },
-    dustHaze: {
-      name: "ri:haze-2-line",
-      color: "#5D4037",
-    },
-    earthquakes: {
-      name: "ri:earthquake-line",
-      color: "#FF5252",
-    },
-    floods: {
-      name: "ic:outline-flood",
-      color: "#3f51b5",
-    },
-    landslides: {
-      name: "mdi:landslide",
-      color: "#212121",
-    },
-    manmade: {
-      name: "game-icons:human-target",
-      color: "#ff5722",
-    },
-    seaLakeIce: {
-      name: "game-icons:frozen-orb",
-      color: "#448aff",
-    },
-    severeStorms: {
-      name: "wi:wu-chancetstorms",
-      color: "#FF5722",
-    },
-    snow: {
-      name: "wpf:snow",
-      color: "#448aff",
-    },
-    tempExtremes: {
-      name: "iconoir:temperature-high",
-      color: "#E91E63",
-    },
-    volcanoes: {
-      name: "fa6-solid:volcano",
-      color: "#d32f2f",
-    },
-    waterColor: {
-      name: "material-symbols:water-ph-outline",
-      color: "#009688",
-    },
-    wildfires: {
-      name: "mdi:fire-alert",
-      color: "#FF5722",
-    },
-  };
-
   const categoryName = eventData.categories[0].id;
-  const iconName = iconNameSet[categoryName].name;
+  const iconName = EVENT_CATEGORY[categoryName].iconName;
 
-  const colorName = iconNameSet[categoryName].color;
+  const colorName = EVENT_CATEGORY[categoryName].color;
   const {
     title,
     geometry: { date: eventDate, coordinates },
@@ -77,8 +24,8 @@ const MapModal = ({ eventData }) => {
 
   return (
     <Dialog.Root>
-      <Dialog.Trigger asChild>
-        <Tooltip content={title}>
+      <Tooltip content={title}>
+        <Dialog.Trigger asChild>
           <Button variant="link">
             <Icon
               icon={iconName}
@@ -87,8 +34,8 @@ const MapModal = ({ eventData }) => {
               fontSize={"30px"}
             />
           </Button>
-        </Tooltip>
-      </Dialog.Trigger>
+        </Dialog.Trigger>
+      </Tooltip>
       <Portal>
         <Dialog.Backdrop />
         <Dialog.Positioner>

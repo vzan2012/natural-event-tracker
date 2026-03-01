@@ -10,26 +10,31 @@ A high-performance dashboard tracking **wildfires, storms, and volcanic activity
 ## 🛠 Tech Stack
 
 - **Core**: React 19 (Hooks), Vite
-- **Data Fetching**: TanStack Query (Caching, Background Updates)
-- **Maps**: Pigeon Maps (Lightweight OSM alternative)
-- **Styling**: Chakra UI (Responsive), Framer Motion (Animations)
+- **Data Fetching**: TanStack Query (Caching & Persistance)
+- **Maps**: Pigeon Maps + Supercluster (Marker Clustering)
+- **Styling**: Chakra UI & Iconify
+- **Testing**: Vitest - Testing Library
 - **Deployment**: Vercel (Serverless)
 
 ## ✨ Key Features
 
 ✔ **Real-time Event Map** – Interactive markers with clickable details  
-✔ **Efficient Data Fetching** – TanStack Query minimizes API calls  
+✔ **Marker Clustering** – Supercluster groups nearby events for better map performance
+✔ **Cache Persistance** - Updated data saved to localStorage - survives page refresh & API downtime
 ✔ **Responsive Design** – Mobile-friendly with Chakra UI  
-✔ **Lightning Fast** – Vite-powered builds
+✔ **Test Suite** – Unit and component tests with Vitest testing library
 
 ## 🚀 Why This Stands Out
 
 - **Production-Grade Data Handling**:
-  - Automatic caching/background updates via TanStack Query
-  - No unnecessary re-fetches (staleTime optimization)
-- **Modern Architecture**:
-  - Custom hooks for API logic separation
+  - Automatic caching/background updates via TanStack Query Persister
+  - Auto-retry on API failure with staleTime optimization
+  - Deferred cluster calculation keeps UI non-blocking
+- **Clean Architecture**:
+  - Shared constants eliminate code duplication following DRY concepts
   - Environment-based API configuration
+- **Testing**:
+  - Used Vitest testing library
 
 ## 📂 Installation
 
