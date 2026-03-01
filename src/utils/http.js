@@ -1,3 +1,12 @@
+/**
+ * Http Utility Functions
+ *
+ * @async
+ * @param {{ fetchURL: string; controller: any; }} data
+ * @param {*} data.fetchURL
+ * @param {*} data.controller
+ * @returns {unknown}
+ */
 export const fetchEventsData = async ({ fetchURL, controller }) => {
   const response = await fetch(fetchURL, {
     signal: controller,
